@@ -4,10 +4,12 @@ from django.shortcuts import render
 def home(request):
     return render(request, 'home.html')
 
-# Get started page view
 def get_started(request):
     if request.method == 'POST':
         # Handle form submission and generate meal plan
+        return render(request, 'get_started.html')
+    else:
+        # Handle GET request to show the form
         return render(request, 'get_started.html')
 
 # Meal plan page view
