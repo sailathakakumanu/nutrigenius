@@ -7,6 +7,21 @@
     <title>Health Profile Setup | AI Dietitian</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        .hidden-checkbox {
+            display: none;
+        }
+
+        .custom-checkbox:checked + label {
+            background-color: #48bb78;
+            color: white;
+            border-color: #48bb78;
+        }
+
+        .custom-checkbox:checked + label i {
+            color: white;
+        }
+    </style>
 </head>
 
 <body class="bg-gradient-to-r from-green-100 via-blue-100 to-purple-200 min-h-screen flex items-center justify-center">
@@ -16,8 +31,8 @@
         <!-- Title -->
         <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Tailor Your Nutrition Goals</h2>
 
-        <form>
-            <!-- Basic Details -->
+        <form method="POST">
+            {% csrf_token %}
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
                 <div>
                     <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
@@ -36,143 +51,158 @@
                 </div>
             </div>
 
-            <!-- Health Conditions -->
             <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">Health Conditions</h3>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <button type="button"
-                    class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
+                <input type="checkbox" id="healthy" name="health_conditions[]" value="Healthy" class="hidden-checkbox custom-checkbox">
+                <label for="healthy" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-smile"></i> Healthy
-                </button>
-                <button type="button"
-                    class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg hover:bg-red-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="heart_diseases" name="health_conditions[]" value="Heart Diseases" class="hidden-checkbox custom-checkbox">
+                <label for="heart_diseases" class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-heart"></i> Heart Diseases
-                </button>
-                <button type="button"
-                    class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg hover:bg-red-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="high_bp_diabetes" name="health_conditions[]" value="High BP/Diabetes" class="hidden-checkbox custom-checkbox">
+                <label for="high_bp_diabetes" class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-tachometer-alt"></i> High BP/Diabetes
-                </button>
-                <button type="button"
-                    class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg hover:bg-red-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="thyroid_issues" name="health_conditions[]" value="Thyroid Issues" class="hidden-checkbox custom-checkbox">
+                <label for="thyroid_issues" class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-thermometer-half"></i> Thyroid Issues
-                </button>
-                <button type="button"
-                    class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg hover:bg-red-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="cholesterol" name="health_conditions[]" value="Cholesterol" class="hidden-checkbox custom-checkbox">
+                <label for="cholesterol" class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-vials"></i> Cholesterol
-                </button>
-                <button type="button"
-                    class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg hover:bg-red-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="pcos_pcod" name="health_conditions[]" value="PCOS/PCOD" class="hidden-checkbox custom-checkbox">
+                <label for="pcos_pcod" class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-female"></i> PCOS/PCOD
-                </button>
-                <button type="button"
-                    class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg hover:bg-red-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="digestive_disorders" name="health_conditions[]" value="Digestive Disorders" class="hidden-checkbox custom-checkbox">
+                <label for="digestive_disorders" class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-stomach"></i> Digestive Disorders
-                </button>
-                <button type="button"
-                    class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg hover:bg-red-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="asthma_respiratory" name="health_conditions[]" value="Asthma/Respiratory Issues" class="hidden-checkbox custom-checkbox">
+                <label for="asthma_respiratory" class="border-2 border-red-500 text-red-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-lungs"></i> Asthma/Respiratory Issues
-                </button>
+                </label>
             </div>
 
             <!-- Fitness Goals -->
             <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">Fitness Goals</h3>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <button type="button"
-                    class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
+                <input type="checkbox" id="weight_loss" name="fitness_goals[]" value="Weight Loss" class="hidden-checkbox custom-checkbox">
+                <label for="weight_loss" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-weight"></i> Weight Loss
-                </button>
-                <button type="button"
-                    class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="muscle_gain" name="fitness_goals[]" value="Muscle Gain" class="hidden-checkbox custom-checkbox">
+                <label for="muscle_gain" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-dumbbell"></i> Muscle Gain
-                </button>
-                <button type="button"
-                    class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="maintenance" name="fitness_goals[]" value="Maintenance" class="hidden-checkbox custom-checkbox">
+                <label for="maintenance" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-balance-scale"></i> Maintenance
-                </button>
-                <button type="button"
-                    class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="endurance" name="fitness_goals[]" value="Improve Endurance" class="hidden-checkbox custom-checkbox">
+                <label for="endurance" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-running"></i> Improve Endurance
-                </button>
-                <button type="button"
-                    class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="flexibility" name="fitness_goals[]" value="Increase Flexibility" class="hidden-checkbox custom-checkbox">
+                <label for="flexibility" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-child"></i> Increase Flexibility
-                </button>
-                <button type="button"
-                    class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="recovery" name="fitness_goals[]" value="Recovery" class="hidden-checkbox custom-checkbox">
+                <label for="recovery" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-band-aid"></i> Recovery
-                </button>
-                <button type="button"
-                    class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="body_toning" name="fitness_goals[]" value="Body Toning" class="hidden-checkbox custom-checkbox">
+                <label for="body_toning" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-male"></i> Body Toning
-                </button>
-                <button type="button"
-                    class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="metabolism" name="fitness_goals[]" value="Improve Metabolism" class="hidden-checkbox custom-checkbox">
+                <label for="metabolism" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-fire-alt"></i> Improve Metabolism
-                </button>
+                </label>
             </div>
 
             <!-- Dietary Preferences -->
             <h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">Dietary Preferences</h3>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <button type="button"
-                    class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
+                <input type="checkbox" id="vegetarian" name="dietary_preferences[]" value="Vegetarian" class="hidden-checkbox custom-checkbox">
+                <label for="vegetarian" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-leaf"></i> Vegetarian
-                </button>
-                <button type="button"
-                    class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="vegan" name="dietary_preferences[]" value="Vegan" class="hidden-checkbox custom-checkbox">
+                <label for="vegan" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-seedling"></i> Vegan
-                </button>
-                <button type="button"
-                    class="border-2 border-orange-500 text-orange-500 font-medium p-3 rounded-lg hover:bg-orange-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="non_veg" name="dietary_preferences[]" value="Non-Vegetarian" class="hidden-checkbox custom-checkbox">
+                <label for="non_veg" class="border-2 border-orange-500 text-orange-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-drumstick-bite"></i> Non-Vegetarian
-                </button>
-                <button type="button"
-                    class="border-2 border-blue-500 text-blue-500 font-medium p-3 rounded-lg hover:bg-blue-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="pescatarian" name="dietary_preferences[]" value="Pescatarian" class="hidden-checkbox custom-checkbox">
+                <label for="pescatarian" class="border-2 border-blue-500 text-blue-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-fish"></i> Pescatarian
-                </button>
-                <button type="button"
-                    class="border-2 border-purple-500 text-purple-500 font-medium p-3 rounded-lg hover:bg-purple-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="keto" name="dietary_preferences[]" value="Keto" class="hidden-checkbox custom-checkbox">
+                <label for="keto" class="border-2 border-purple-500 text-purple-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-bacon"></i> Keto
-                </button>
-                <button type="button"
-                    class="border-2 border-yellow-500 text-yellow-500 font-medium p-3 rounded-lg hover:bg-yellow-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="gluten_free" name="dietary_preferences[]" value="Gluten-Free" class="hidden-checkbox custom-checkbox">
+                <label for="gluten_free" class="border-2 border-yellow-500 text-yellow-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-bread-slice"></i> Gluten-Free
-                </button>
-                <button type="button"
-                    class="border-2 border-gray-500 text-gray-500 font-medium p-3 rounded-lg hover:bg-gray-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="paleo" name="dietary_preferences[]" value="Paleo" class="hidden-checkbox custom-checkbox">
+                <label for="paleo" class="border-2 border-gray-500 text-gray-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-seedling"></i> Paleo
-                </button>
-                <button type="button"
-                    class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg hover:bg-pink-500 hover:text-white transition">
+                </label>
+
+                <input type="checkbox" id="dairy_free" name="dietary_preferences[]" value="Dairy-Free" class="hidden-checkbox custom-checkbox">
+                <label for="dairy_free" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
                     <i class="fas fa-ice-cream"></i> Dairy-Free
-                </button>
+                </label>
             </div>
+
             <!-- Meal Plan Preferences Section -->
 <div class="mb-8 mt-8">
     <h3 class="text-xl font-semibold mb-4 text-gray-800 text-center">Select Your Meal Plan Preferences</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         
-        <!-- Three Meals a Day -->
-        <button type="button" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
-        
-            <span class="block text-center font-medium">Three Meals a Day</span>
-        </button>
-
-        <!-- Small Frequent Meals -->
-        <button type="button" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
-            
-            <span class="block text-center font-medium">Small Frequent Meals</span>
-        </button>
-
-        <!-- Intermittent Fasting -->
-        <button type="button" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
-            
-            <span class="block text-center font-medium">Intermittent Fasting</span>
-        </button>
-
-        <!-- Balanced Macro Diet -->
-        <button type="button" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg hover:bg-green-500 hover:text-white transition">
-            <span class="block text-center font-medium">Balanced Macro Diet</span>
-        </button>
+        <input type="checkbox" id="three_meals_day" name="mealplan_preferences[]" value="three_meals_per_day" class="hidden-checkbox custom-checkbox">
+                <label for="three_meals_day" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
+                    Three Meals a Day
+                </label>
+                <input type="checkbox" id="small_frequent" name="mealplan_preferences[]" value="small_frequent_meals" class="hidden-checkbox custom-checkbox">
+                <label for="small_frequent" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
+                    Small Frequent Meals
+                </label>
+                <input type="checkbox" id="intermittent_fasting" name="mealplan_preferences[]" value="intermittent_fasting" class="hidden-checkbox custom-checkbox">
+                <label for="intermittent_fasting" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
+                    Intermittent Fasting
+                </label>
+                <input type="checkbox" id="balanced_macro" name="mealplan_preferences[]" value="balanced_macro_diet" class="hidden-checkbox custom-checkbox">
+                <label for="balanced_macro" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
+                    Balanced Macro Diet
+                </label>
 
     </div>
 </div>

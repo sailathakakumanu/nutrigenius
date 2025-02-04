@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Meal Plan</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-6">
+        <div class="bg-white p-6 rounded shadow-md">
+            <h1 class="text-3xl font-semibold text-center mb-4">Your Personalized Meal Plan</h1>
+            
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold">Generated Meal Plan</h2>
+                <div class="mt-4">
+                    {% if meal_plan %}
+                        <pre class="whitespace-pre-wrap text-gray-700">{{ meal_plan }}</pre>
+                    {% else %}
+                        <p class="text-red-500">No meal plan generated yet. Please fill out the form to get a meal plan.</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-6">
+                <a href="{% url 'get_started' %}" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">Regenerate Meal Plan</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
