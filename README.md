@@ -1,10 +1,11 @@
+
 ---
 
 # NutriGenius 🍏🤖
 
 **NutriGenius** is a personalized diet planning web application that leverages **Generative AI** to create customized meal plans tailored to your health conditions, fitness goals, and dietary preferences. Built using **Django**, **Tailwind CSS**, and **Gemini AI**, NutriGenius delivers balanced, nutritious, and goal-oriented diet recommendations in a user-friendly interface.
 
----
+***
 
 ## 🛠 Tech Stack
 
@@ -14,7 +15,7 @@
 - **Database:** SQLite (default), easily switchable to MySQL/PostgreSQL  
 - **APIs & Libraries:** Google Generative AI SDK  
 
----
+***
 
 ## 🚀 Features
 
@@ -24,7 +25,7 @@
 - **Session Management:** Save and revisit generated meal plans without refilling the form.
 - **Scalable Codebase:** Easily extendable for new features or integrations.
 
----
+***
 
 ## 📝 Getting Started
 
@@ -48,7 +49,7 @@ python manage.py runserver
 ```
 Visit `http://127.0.0.1:8000` in your browser.
 
----
+***
 
 ## 🔑 Key Components
 
@@ -57,8 +58,9 @@ Visit `http://127.0.0.1:8000` in your browser.
 - **`forms.py`:** Manages form fields and validation.
 - **`meal_plan.html`:** Displays AI-generated diet plans.
 
----
+***
 
+This will render correctly on GitHub without causing YAML-related errors.
 
 ## 📧 Contact
 
