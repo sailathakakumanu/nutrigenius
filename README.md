@@ -60,8 +60,6 @@ Visit `http://127.0.0.1:8000` in your browser.
 
 ***
 
-This will render correctly on GitHub without causing YAML-related errors.
-
 ## 📧 Contact
 
 For any inquiries or suggestions, feel free to reach out:
