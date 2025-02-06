@@ -3,7 +3,7 @@ from .forms import HealthProfileForm
 import google.generativeai as genai
 
 # Configure Gemini AI API key
-genai.configure(api_key="api_key")
+genai.configure(api_key="YOUR_API_KEY")
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 # Landing page view
@@ -23,7 +23,11 @@ def get_started(request):
             health_conditions = ", ".join(form.cleaned_data['health_conditions'])
             fitness_goals = ", ".join(form.cleaned_data['fitness_goals'])
             dietary_preferences = ", ".join(form.cleaned_data['dietary_preferences'])
-            
+             # Print the selected options in the console
+            # print(f"Age: {age}, Weight: {weight}, Height: {height}")
+            # print(f"Health Conditions Selected: {''.join(health_conditions)}")
+            # print(f"Fitness Goals Selected: {''.join(fitness_goals)}")
+            # print(f"Dietary Preferences Selected: {''.join(dietary_preferences)}")
             # Prepare the prompt for the Gemini AI API
             prompt = (
                 f"Generate a personalized diet plan for the following details:\n"

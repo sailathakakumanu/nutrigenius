@@ -1,74 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Profile Setup | AI Dietitian</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Health Profile Setup | NutriGenius</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-        .hidden-checkbox {
-            display: none;
-        }
-
+        .hidden-checkbox { display: none; }
         .custom-checkbox:checked + label {
             background-color: #48bb78;
             color: white;
             border-color: #48bb78;
         }
-
-        .custom-checkbox:checked + label i {
-            color: white;
-        }
+        .custom-checkbox:checked + label i { color: white; }
     </style>
 </head>
 
 <body class="bg-gradient-to-r from-green-100 via-blue-100 to-purple-200 min-h-screen flex items-center justify-center">
-
-    <div class="bg-white shadow-lg rounded-2xl p-8 max-w-5xl w-full">
-
+    <div class="bg-white shadow-lg rounded-2xl p-8 max-w-4xl w-full">
+        
         <!-- Title -->
         <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Tailor Your Nutrition Goals</h2>
 
         <form method="POST" action="{% url 'get_started' %}">
             {% csrf_token %}
             
-            <!-- Render the form fields dynamically -->
-            {{ form.as_p }}
+            <!-- Age, Weight, Height Section -->
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">Your Basic Info</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label for="age" class="block text-gray-700 font-medium mb-1">Age</label>
+                        <input type="number" id="age" name="age" class="w-full border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-400">
+                    </div>
+                    <div>
+                        <label for="weight" class="block text-gray-700 font-medium mb-1">Weight (kg)</label>
+                        <input type="number" id="weight" name="weight" class="w-full border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-400">
+                    </div>
+                    <div>
+                        <label for="height" class="block text-gray-700 font-medium mb-1">Height (cm)</label>
+                        <input type="number" id="height" name="height" class="w-full border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-400">
+                    </div>
+                </div>
+            </div>
 
-            <!-- Meal Plan Preferences Section -->
-<div class="mb-8 mt-8">
-    <h3 class="text-xl font-semibold mb-4 text-gray-800 text-center">Select Your Meal Plan Preferences</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        
-        <input type="checkbox" id="three_meals_day" name="mealplan_preferences[]" value="three_meals_per_day" class="hidden-checkbox custom-checkbox">
-                <label for="three_meals_day" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
-                    Three Meals a Day
-                </label>
-                <input type="checkbox" id="small_frequent" name="mealplan_preferences[]" value="small_frequent_meals" class="hidden-checkbox custom-checkbox">
-                <label for="small_frequent" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
-                    Small Frequent Meals
-                </label>
-                <input type="checkbox" id="intermittent_fasting" name="mealplan_preferences[]" value="intermittent_fasting" class="hidden-checkbox custom-checkbox">
-                <label for="intermittent_fasting" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
-                    Intermittent Fasting
-                </label>
-                <input type="checkbox" id="balanced_macro" name="mealplan_preferences[]" value="balanced_macro_diet" class="hidden-checkbox custom-checkbox">
-                <label for="balanced_macro" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
-                    Balanced Macro Diet
-                </label>
+            <!-- Health Conditions Section -->
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">Health Conditions</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {% for value, label in form.health_conditions.field.choices %}
+                        <input type="checkbox" id="{{ value }}" name="health_conditions" value="{{ value }}" class="hidden-checkbox custom-checkbox">
+                        <label for="{{ value }}" class="border-2 border-blue-500 text-blue-500 font-medium p-3 rounded-lg cursor-pointer">
+                            {{ label }}
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
 
-    </div>
-</div>
+            <!-- Fitness Goals Section -->
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">Fitness Goals</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {% for value, label in form.fitness_goals.field.choices %}
+                        <input type="checkbox" id="{{ value }}" name="fitness_goals" value="{{ value }}" class="hidden-checkbox custom-checkbox">
+                        <label for="{{ value }}" class="border-2 border-green-500 text-green-500 font-medium p-3 rounded-lg cursor-pointer">
+                            {{ label }}
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Dietary Preferences Section -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">Dietary Preferences</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {% for value, label in form.dietary_preferences.field.choices %}
+                        <input type="checkbox" id="{{ value }}" name="dietary_preferences" value="{{ value }}" class="hidden-checkbox custom-checkbox">
+                        <label for="{{ value }}" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
+                            {{ label }}
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="mb-8 mt-8">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800 text-center">Select Your Meal Plan Preferences</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    
+                    <input type="checkbox" id="three_meals_day" name="mealplan_preferences[]" value="three_meals_per_day" class="hidden-checkbox custom-checkbox">
+                            <label for="three_meals_day" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
+                                Three Meals a Day
+                            </label>
+                            <input type="checkbox" id="small_frequent" name="mealplan_preferences[]" value="small_frequent_meals" class="hidden-checkbox custom-checkbox">
+                            <label for="small_frequent" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
+                                Small Frequent Meals
+                            </label>
+                            <input type="checkbox" id="intermittent_fasting" name="mealplan_preferences[]" value="intermittent_fasting" class="hidden-checkbox custom-checkbox">
+                            <label for="intermittent_fasting" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
+                                Intermittent Fasting
+                            </label>
+                            <input type="checkbox" id="balanced_macro" name="mealplan_preferences[]" value="balanced_macro_diet" class="hidden-checkbox custom-checkbox">
+                            <label for="balanced_macro" class="border-2 border-pink-500 text-pink-500 font-medium p-3 rounded-lg cursor-pointer">
+                                Balanced Macro Diet
+                            </label>
+            
+                </div>
+            </div>
             <!-- Submit Button -->
             <div class="text-center">
-                <input type="submit" value="Generate My Diet Plan" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50">
-                
+                <input type="submit" value="Generate My Diet Plan" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">
             </div>
         </form>
     </div>
-
 </body>
-
 </html>
