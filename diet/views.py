@@ -30,15 +30,17 @@ def get_started(request):
             # print(f"Dietary Preferences Selected: {''.join(dietary_preferences)}")
             # Prepare the prompt for the Gemini AI API
             prompt = (
-                f"Generate a personalized diet plan for the following details:\n"
+                f"Imagine you are a professional dietitian creating a personalized weekly meal plan for an individual based on the following details:\n"
                 f"Age: {age} years, Weight: {weight} kg, Height: {height} cm.\n"
                 f"Health Conditions: {health_conditions}.\n"
                 f"Fitness Goals: {fitness_goals}.\n"
                 f"Dietary Preferences: {dietary_preferences}.\n"
-                "Create a balanced meal plan for a week, including breakfast, lunch, and dinner for each day. "
-                "Ensure that the meals are tailored to the health conditions, fitness goals, and dietary preferences provided."
+                "Provide a detailed, balanced meal plan for each day of the week, including breakfast, lunch, and dinner. "
+                "Each meal should be tailored to the individual's health conditions, fitness goals, and dietary preferences. "
+                "Ensure that the meals are nutritious, easy to prepare, and suitable for the individual's specific needs. "
+                "Include calorie counts for each meal, and consider hydration tips as well as advice for digestive issues if relevant, focusing on easily digestible foods."
             )
-            
+
             # Send request to Gemini AI API to generate meal plan
             response = model.generate_content(prompt)
             generated_meal_plan = response.text
