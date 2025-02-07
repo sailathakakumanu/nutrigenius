@@ -14,7 +14,7 @@
             <span class="text-xl font-bold">Nutrigenius</span>
         </div>
         <nav class="space-x-4">
-            <a href="#" class="text-gray-700 hover:text-gray-900">Features</a>
+            <a href="#features" class="text-gray-700 hover:text-gray-900">Features</a>
             <a href="#" class="text-gray-700 hover:text-gray-900">How it Works</a>
             <a href="#" class="text-gray-700 hover:text-gray-900">Contact</a>
         </nav>
@@ -23,6 +23,7 @@
             <a href="#" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Sign Up</a>
         </div>
     </header>
+    
     <main class="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-50">
         <div class="text-center max-w-2xl">
             <h1 class="text-4xl font-bold mb-4">Your Personal AI-Powered Nutrition Expert</h1>
@@ -33,5 +34,31 @@
             <img src="{% static 'diet/Nutrition-planning.png' %}" alt="Nutrition Planning Illustration" class="w-full max-w-md">
         </div>
     </main>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6">Key Features of Nutrigenius</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-100 p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold mb-2">Personalized Meal Plans</h3>
+                    <p class="text-gray-700">AI-generated diet plans tailored to your health conditions, dietary preferences, and fitness goals.</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold mb-2">AI-Powered Recommendations</h3>
+                    <p class="text-gray-700">Get intelligent food choices and meal suggestions optimized for your lifestyle.</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold mb-2">Nutritional Insights</h3>
+                    <p class="text-gray-700">Understand calorie intake, macronutrient balance, and hydration needs with AI-driven insights.</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold mb-2">Easy-to-Follow Recipes</h3>
+                    <p class="text-gray-700">Get simple, nutritious, and delicious meal recipes crafted for your health goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
