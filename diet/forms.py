@@ -14,7 +14,7 @@ class HealthProfileForm(forms.Form):
             ('Cholesterol', 'Cholesterol'),
             ('PCOS/PCOD', 'PCOS/PCOD'),
             ('Digestive Disorders', 'Digestive Disorders'),
-            ('Asthma/Respiratory Issues', 'Asthma/Respiratory Issues')
+            ('Respiratory Issues', 'Respiratory Issues')
         ],
         widget=forms.CheckboxSelectMultiple,
         required=False
@@ -43,7 +43,8 @@ class HealthProfileForm(forms.Form):
             ('Vegan', 'Vegan'),
             ('Paleo', 'Paleo'),
             ('Gluten-Free', 'Gluten-Free'),
-            ('Mediterranean', 'Mediterranean')
+            ('Mediterranean', 'Mediterranean'),
+            ('Pescatarian','Pescatarian')
         ],
         widget=forms.CheckboxSelectMultiple,
         required=False
