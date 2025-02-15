@@ -60,11 +60,4 @@ Visit `http://127.0.0.1:8000` in your browser.
 
 ***
 
-## 📧 Contact
-
-For any inquiries or suggestions, feel free to reach out:
-
-- **Email:** sailatha8724@gmail.com
-- **GitHub:** [sailathakakumanu](https://github.com/sailathakakumanu)
-
 ---
