@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import HealthProfileForm
 import google.generativeai as genai
+import re
 
 # Configure Gemini AI API key
 genai.configure(api_key="YOUR_API_KEY")
@@ -56,13 +57,19 @@ def get_started(request):
 
     return render(request, 'get_started.html', {'form': form})
 
-# Meal plan page view
+def clean_meal_plan(response):
+    """Remove unwanted symbols and format for bullet points."""
+    cleaned_response = re.sub(r'[#*\-]+', '', response).strip()
+    return [line.strip() for line in cleaned_response.split("\n") if line.strip()]  # Convert to list
+
 def meal_plan(request):
-    # Retrieve the meal plan from the session
     generated_meal_plan = request.session.get('meal_plan')
 
     if not generated_meal_plan:
-        # Redirect back to get_started if meal plan isn't generated yet
         return redirect('get_started')
 
-    return render(request, 'meal_plan.html', {'meal_plan': generated_meal_plan})
+    # Convert raw text to bullet points
+    formatted_meal_plan = clean_meal_plan(generated_meal_plan)
+
+    return render(request, 'meal_plan.html', {'meal_plan': formatted_meal_plan})
+
