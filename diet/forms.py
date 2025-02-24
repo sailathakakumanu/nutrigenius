@@ -49,3 +49,14 @@ class HealthProfileForm(forms.Form):
         widget=forms.CheckboxSelectMultiple,
         required=False
     )
+    meal_preferences = forms.MultipleChoiceField(
+        choices=[
+            ('Three Meals a Day', 'Three Meals a Day'), 
+            ('Small Frequent Meals', 'Small Frequent Meals'), 
+            ('Intermittent Fasting', 'Intermittent Fasting'),
+            ('Balanced Macro Diet', 'Balanced Macro Diet'),
+        ],
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
